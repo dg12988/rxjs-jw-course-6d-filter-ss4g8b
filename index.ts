@@ -1,4 +1,5 @@
 import { Observable } from "rxjs";
+import { filter } from "rxjs/operators";
 
 
 interface NewsItem{
@@ -19,3 +20,11 @@ const newsFeed$ = new Observable<NewsItem>(subscriber => {
   subscriber.next({ category: "Business", content: 'E'}), 7000);
 });
 
+
+const sportsNewsFeed$ = newsFeed$.pipe(
+  filter(item => item.category === 'Sports')
+);
+
+newsFeed$.subscribe(
+  item => console.log(item)
+);
